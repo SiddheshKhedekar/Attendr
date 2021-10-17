@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "877099783497",
+    "project_id": "sid-demo-project",
+    "storage_bucket": "sid-demo-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:877099783497:android:c0ab76c036e1dc2439b698",
+        "android_client_info": {
+          "package_name": "dev.sid.attendr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "877099783497-cf56di29tupn4td07577rarl8hd3igt2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_KePXQOvU6Dcmr6eL5Rwk-yZ3498kA7M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "877099783497-cf56di29tupn4td07577rarl8hd3igt2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
