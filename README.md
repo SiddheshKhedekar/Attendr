@@ -1,1 +1,3 @@
-"# Attendr" 
+# Attendr
+
+## Attendance Tracker
