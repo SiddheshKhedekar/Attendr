@@ -40,4 +40,13 @@ public class AttendrFirestoreConnector {
         // [END get_document]
     }
 
+    public void updateDocument(int count) {
+        // [START get_document]
+        count+=1;
+        DocumentReference docRef = db.collection("attendr").document("test");
+        docRef.update("count", count).addOnSuccessListener(aVoid -> Log.d(TAG, "DocumentSnapshot successfully updated!"))
+        .addOnFailureListener(e -> Log.w(TAG, "Error updating document", e));
+        // [END get_document]
+    }
+
 }

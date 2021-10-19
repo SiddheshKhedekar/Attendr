@@ -3,7 +3,7 @@ package dev.sid.attendr;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -18,10 +18,18 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseFirestore mFirestore = FirebaseFirestore.getInstance();
         AttendrFirestoreConnector attendrFsCon = new AttendrFirestoreConnector(mFirestore);
-        attendrFsCon.getDocument(count -> {
-            Log.d(TAG, "DocumentSnapshot data: " + count);
-            TextView countTxt = findViewById(R.id.count);
-            countTxt.setText("" + count);
+        TextView countTxt = findViewById(R.id.count);
+        populateValue(attendrFsCon, countTxt);
+
+        Button add = findViewById(R.id.add);
+        add.setOnClickListener(view -> {
+            int count = Integer.parseInt(countTxt.getText().toString());
+            attendrFsCon.updateDocument(count);
+            populateValue(attendrFsCon, countTxt);
         });
+    }
+
+    public void populateValue(AttendrFirestoreConnector attendrFsCon, TextView countTxt) {
+        attendrFsCon.getDocument(count -> countTxt.setText(String.valueOf(count)));
     }
 }
