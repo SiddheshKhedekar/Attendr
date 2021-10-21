@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         Button next = findViewById(R.id.next);
         next.setOnClickListener(view -> {
             String organization = org.getText().toString();
-            attendrFsCon.checkDocument(attendrCallback -> Snackbar.make(constraintLayout, String.valueOf(attendrCallback), Snackbar.LENGTH_LONG).show(),organization);
+            attendrFsCon.checkIfOrganizationExists(attendrCallback -> Snackbar.make(constraintLayout, String.valueOf(attendrCallback), Snackbar.LENGTH_LONG).show(),organization);
             Log.d(TAG, "Callback data exists");
         });
     }

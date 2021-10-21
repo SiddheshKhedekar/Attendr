@@ -8,6 +8,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class AttendrFirestoreConnector {
@@ -19,7 +21,7 @@ public class AttendrFirestoreConnector {
         this.db = db;
     }
 
-    public void checkDocument(AttendrCallback attendrCallback, String organization) {
+    public void checkIfOrganizationExists(AttendrCallback attendrCallback, String organization) {
         // [START get_document]
         db.collection("organizations").get()
         .addOnCompleteListener(task -> {
@@ -40,13 +42,36 @@ public class AttendrFirestoreConnector {
                         e.printStackTrace();
                     }
                 }
-                attendrCallback.checkOrganization(flag);
+                if (flag) {
+                    attendrCallback.checkOrganization(true);
+                } else {
+                    if (!organization.isEmpty()) {
+                        addIfOrganizationDoesNotExists(attendrCallback, organization);
+                    }
+                }
             } else {
                 attendrCallback.checkOrganization(false);
                 Log.d(TAG, "Error getting documents: ", task.getException());
             }
         });
         // [END get_document]
+    }
+
+    private void addIfOrganizationDoesNotExists(AttendrCallback attendrCallback, String organization) {
+        // Add a new document with a generated id.
+        Map<String, Object> data = new HashMap<>();
+        data.put("name", organization);
+        db.collection("organizations")
+                .add(data)
+                .addOnSuccessListener(documentReference -> {
+                    attendrCallback.checkOrganization(true);
+                    Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                })
+                .addOnFailureListener(e -> {
+                    attendrCallback.checkOrganization(false);
+                    Log.w(TAG, "Error adding document", e);
+                });
+
     }
 
 //    public void getDocument(AttendrCallback attendrCallback) {
