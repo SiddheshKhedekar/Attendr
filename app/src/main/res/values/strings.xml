@@ -2,4 +2,6 @@
     <string name="app_name">Attendr</string>
     <string name="next">Next</string>
     <string name="org_label">Enter your organization name</string>
+    <string name="saved_organization">saved_organization</string>
+    <string name="saved_default_organization">null</string>
 </resources>
